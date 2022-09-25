@@ -2,13 +2,13 @@
 
 PATH=""
 
-for pathfile in /etc/paths.d/* /etc/paths; do
-    if [ ! -f $pathfile ]; then
+for pathfile in /etc/paths.d/* /etc/paths "${XDG_CONFIG_HOME:-$HOME/.config}/paths"; do
+    if [ ! -f "$pathfile" ]; then
         continue
     fi
     while read -r pathline; do
         PATH+=$pathline:
-    done < $pathfile
+    done < "$pathfile"
 done
 
-echo -n ${PATH%:}
+echo -n "${PATH%:}"

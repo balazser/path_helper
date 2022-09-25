@@ -10,13 +10,15 @@ Add the `paths` script to a location like `/usr/local/bin` or whatever. Edit `/e
 
 ## How it works
 
-`paths` reads paths from `/etc/paths.d/*` and `/etc/paths` and prints a valid `$PATH` variable.
+`paths` reads paths from `/etc/paths.d/*`, `/etc/paths` and `${XDG_CONFIG_HOME:-$HOME/.config}/paths` and prints a valid `$PATH` variable.
 Files are read in alphabetical order and `/etc/paths` is always read last.
 Paths within the files are read by line order.
 
 ## Example
 
 ```
+${XDG_CONFIG_HOME:-$HOME/.config}/paths:
+    /home/username/bin
 /etc/paths:
     /usr/bin
     /bin
