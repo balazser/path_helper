@@ -7,6 +7,10 @@ for pathfile in /etc/paths.d/* /etc/paths "${XDG_CONFIG_HOME:-$HOME/.config}/pat
         continue
     fi
     while read -r pathline; do
+        # ignore lines starting with #
+        if [[ $pathline =~ ^#.* ]]; then
+            continue
+        fi
         PATH+=$pathline:
     done < "$pathfile"
 done
